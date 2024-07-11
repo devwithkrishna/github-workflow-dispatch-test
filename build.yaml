@@ -1,0 +1,26 @@
+name: Build
+on:
+  workflow_dispatch:
+
+job:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+
+    - name: echo 1
+      run: echo "i am a cat1"
+
+    - name: echo 2
+      run: echo "i am a cat2"
+
+    - name: echo 3
+      run: echo "i am a cat3"
+
+    - name: println
+      run: echo "testing out workflow to be ran from another wrkflow using workflow_run methd"
+
+    - name: complete
+
+      run: echo "complete"

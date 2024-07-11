@@ -1,0 +1,54 @@
+name: Trigger a workflow using workflow_run
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build"]
+    types: [requested]
+    branches-ignore:
+      - "feature/*"
+    branches:
+      - "main"
+
+
+jobs:
+  trigger-workflow-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Git checkout
+      uses: actions/checkout@v4
+    
+    - name: Token generator
+      uses: githubofkrishnadhas/github-access-using-githubapp@v1
+      with:
+        github_app_id: ${{ secrets.WDC_APP_ID }}
+        github_app_private_key : ${{ secrets.WDC_PVT_KEY }}
+        github_account_type : organization
+
+    # - name: Trigger another workflow via API
+    #   env:
+    #     OWNER_REPO: ${{ github.repository }}
+    #     WORKFLOW_ID: remote-triggered.yaml  # or the workflow ID if you prefer
+    #     REF: main  # or the branch you want to use
+    #   run: |
+    #     curl -L \
+    #       -X POST \
+    #       -H "Accept: application/vnd.github+json" \
+    #       -H "Authorization: Bearer $GH_APP_TOKEN" \
+    #       https://api.github.com/repos/${{ env.OWNER_REPO }}/actions/workflows/$WORKFLOW_ID/dispatches \
+    #       -d '{"ref":"main","inputs":{"name":"Kunai the Octocat","home":"Tokiyo, Japan"}}'
+
+    - name: echo stmnts
+      run: echo "i am a cat"
+
+    - name: println
+      run: echo "testing out workflow run on main branch to trigger worklfow named Build"
+
+      
+    - name: complete
+      run: echo "Hello world"
