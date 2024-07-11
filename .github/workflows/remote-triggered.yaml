@@ -1,0 +1,29 @@
+name: Print Params Workflow remotely triggerd
+
+on: 
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of the Octocat'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'Home of the Octocat'
+        required: true
+        default: 'San Francisco, CA'
+
+jobs:
+  print-params:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Print the parameters
+      run: |
+        echo "Name: ${{ github.event.inputs.name }}"
+        echo "Home: ${{ github.event.inputs.home }}"
