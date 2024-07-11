@@ -9,9 +9,6 @@ on:
 jobs:
   trigger-workflow-run:
     runs-on: ubuntu-latest
-    # this child workflow will only run if parent workflow execution is success
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
 
     steps:
     
