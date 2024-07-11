@@ -8,8 +8,8 @@ on:
   workflow_run:
     workflows: ["Build"]
     types: [requested]
-    branches-ignore:
-      - "feature/*"
+    # branches-ignore:
+    #   - "feature/*"
     branches:
       - "main"
 
