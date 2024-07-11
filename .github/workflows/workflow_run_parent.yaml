@@ -1,32 +1,34 @@
-name: Build
+name: Trigger a workflow using workflow_run
+
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: ["Trigger a workflow using workflow_run"] # This build.yaml workflow iwll only run in master beanch when Trigger a workflow using workflow_run is comlpeted
-    types:
-      -  completed
-      #   - "feature/*"
+  push:
     branches:
-      - "main"
+      - main
+  workflow_dispatch:
 
 jobs:
-  Build:
+  trigger-workflow-run:
     runs-on: ubuntu-latest
-    
+
     steps:
+    
+    - name: Git checkout
+      uses: actions/checkout@v4
+    
+    # This is an optional step
+    - uses: actions/create-github-app-token@v1
+      id: app-token
+      with:
+        app-id: ${{ secrets.WDC_APP_ID }}
+        private-key: ${{ secrets.WDC_PVT_KEY }}
 
-    - name: echo 1
-      run: echo "i am a cat1"
 
-    - name: echo 2
-      run: echo "i am a cat2"
-
-    - name: echo 3
-      run: echo "i am a cat3"
+    - name: echo stmnts
+      run: echo "i am a cat"
 
     - name: println
-      run: echo "testing out workflow to be ran from another wrkflow using workflow_run methd"
+      run: echo "testing out workflow run on main branch to trigger worklfow named Build"
 
+      
     - name: complete
-
-      run: echo "complete"
+      run: echo "Hello world"
