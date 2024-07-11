@@ -23,12 +23,18 @@ jobs:
     - name: Git checkout
       uses: actions/checkout@v4
     
-    - name: Token generator
-      uses: githubofkrishnadhas/github-access-using-githubapp@v1
+    # - name: Token generator
+    #   uses: githubofkrishnadhas/github-access-using-githubapp@v1
+    #   with:
+    #     github_app_id: ${{ secrets.WDC_APP_ID }}
+    #     github_app_private_key : ${{ secrets.WDC_PVT_KEY }}
+    #     github_account_type : organization
+
+    - uses: actions/create-github-app-token@v1
+      id: app-token
       with:
-        github_app_id: ${{ secrets.WDC_APP_ID }}
-        github_app_private_key : ${{ secrets.WDC_PVT_KEY }}
-        github_account_type : organization
+        app-id: ${{ vars.secrets.WDC_APP_ID }}
+        private-key: ${{ secrets.WDC_PVT_KEY }}
 
     # - name: Trigger another workflow via API
     #   env:
