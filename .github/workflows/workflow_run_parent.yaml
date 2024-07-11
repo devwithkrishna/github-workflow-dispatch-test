@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["Trigger a workflow using workflow_run"] # This build.yaml workflow iwll only run in master beanch when Trigger a workflow using workflow_run is comlpeted
-    types: [completed]
-      # branches-ignore:
+    types:
+      -  completed
       #   - "feature/*"
     branches:
       - "main"
