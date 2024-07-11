@@ -9,31 +9,27 @@ on:
 jobs:
   trigger-workflow-run:
     runs-on: ubuntu-latest
+    # this child workflow will only run if parent workflow execution is success
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
 
     steps:
     
     - name: Git checkout
       uses: actions/checkout@v4
     
-
+    # This is an optional step
     - uses: actions/create-github-app-token@v1
       id: app-token
       with:
         app-id: ${{ secrets.WDC_APP_ID }}
         private-key: ${{ secrets.WDC_PVT_KEY }}
 
-    # - name: Trigger another workflow via API
-    #   env:
-    #     OWNER_REPO: ${{ github.repository }}
-    #     WORKFLOW_ID: remote-triggered.yaml  # or the workflow ID if you prefer
-    #     REF: main  # or the branch you want to use
-    #   run: |
-    #     curl -L \
-    #       -X POST \
-    #       -H "Accept: application/vnd.github+json" \
-    #       -H "Authorization: Bearer $GH_APP_TOKEN" \
-    #       https://api.github.com/repos/${{ env.OWNER_REPO }}/actions/workflows/$WORKFLOW_ID/dispatches \
-    #       -d '{"ref":"main","inputs":{"name":"Kunai the Octocat","home":"Tokiyo, Japan"}}'
+    - name: Print triggering workflow and build number
+      run: |
+        echo "Triggered by workflow: ${{ github.event.workflow_run.name }}"
+        echo "Build number: ${{ github.event.workflow_run.run_number }}"
+        echo "Run ID: ${{ github.event.workflow_run.id }}"
 
     - name: echo stmnts
       run: echo "i am a cat"

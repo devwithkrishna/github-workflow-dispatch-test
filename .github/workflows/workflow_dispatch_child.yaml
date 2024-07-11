@@ -16,7 +16,7 @@ on:
         default: 'San Francisco, CA'
 
 jobs:
-  print-params:
+  workflow_dispatch_child:
     runs-on: ubuntu-latest
 
     steps:

@@ -12,18 +12,12 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
+    
     steps:
 
     - name: echo 1
       run: echo "i am a cat1"
 
-    - name: Print triggering workflow and build number
-      run: |
-        echo "Triggered by workflow: ${{ github.event.workflow_run.name }}"
-        echo "Build number: ${{ github.event.workflow_run.run_number }}"
-        echo "Run ID: ${{ github.event.workflow_run.id }}"
     - name: echo 2
       run: echo "i am a cat2"
 

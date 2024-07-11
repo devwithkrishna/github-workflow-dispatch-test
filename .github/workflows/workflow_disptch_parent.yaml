@@ -1,4 +1,4 @@
-name: Trigger Dispatch Workflow
+name: Trigger Dispatch Workflow parent
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  trigger-dispatch:
+  trigger-workflow-dispatch-parent:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
     - name: Trigger another workflow via API
       env:
         OWNER_REPO: ${{ github.repository }}
-        WORKFLOW_ID: remote-triggered.yaml  # or the workflow ID if you prefer
+        WORKFLOW_ID: workflow_dispatch_child.yaml  # or the workflow ID if you prefer
         REF: main  # or the branch you want to use
       run: |
         curl -L \
