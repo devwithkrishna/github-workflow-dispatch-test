@@ -59,7 +59,7 @@ i am passing ***GitHub app installation access*** token to trigger the workflow.
 
 ## worlfow_run method
 
-* `workflow_run` method provides more importnce to worflow name. here it is `Build`
+* `workflow_run` method provides more importance to workflow name. here it is `Build`
 
 ```
 name: Build
@@ -76,7 +76,7 @@ on:
 
 ```
 
-* The name inside workflows: ["x"] , this x will be the workflow name and the workflow which will be triggered post first one.
+* The name inside workflows: ["x"] , this x will be the workflow name and the workflow which will be triggered first then Build.
 
 * types : There are 3 values  [workflow_run](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run)
 
